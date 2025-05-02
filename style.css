@@ -1,0 +1,1502 @@
+:root {
+    /* Core colors */
+    --bg-color: #ffffff;
+    --text-color: #1d1d1f;
+    --text-secondary: #86868b;
+    --text-tertiary: #6e6e73;
+    
+    /* UI Elements */
+    --container-bg: rgba(255, 255, 255, 0.98);
+    --input-bg: rgba(255, 255, 255, 0.9);
+    --border-color: transparent;
+    --hover-color: rgba(0, 0, 0, 0.04);
+    
+    /* Accent colors */
+    --primary-color: #0071e3;
+    --primary-hover: #0077ed;
+    --primary-color-rgb: 0, 113, 227;
+    
+    /* Shadows and effects */
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.08);
+    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    
+    /* Transitions */
+    --transition-duration: 0.2s;
+    --transition-timing: cubic-bezier(0.25, 1, 0.5, 1);
+    
+    /* Border radius */
+    --radius-sm: 4px;
+    --radius-md: 6px;
+    --radius-lg: 8px;
+    
+    /* Spacing */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.375rem;
+    --spacing-md: 0.5rem;
+    --spacing-lg: 0.75rem;
+    --spacing-xl: 1rem;
+
+    /* Category Colors */
+    --category-length: #007AFF;
+    --category-temperature: #FF3B30;
+    --category-weight: #5856D6;
+    --category-volume: #34C759;
+    --category-area: #FF9500;
+    --category-speed: #AF52DE;
+    --category-pressure: #FF2D55;
+    --category-energy: #5AC8FA;
+    --category-power: #FFCC00;
+    --category-time: #32ADE6;
+    --category-data: #A2845E;
+    --category-frequency: #00C7BE;
+    --category-angle: #30B0C7;
+    --category-fuel: #E6AA00;
+    --category-cooking: #66E13D;
+    --category-currency: #30D158;
+}
+
+/* Dark mode variables */
+[data-theme="dark"] {
+    --bg-color: #000000;
+    --text-color: #f5f5f7;
+    --text-secondary: #86868b;
+    --text-tertiary: #6e6e73;
+    
+    --container-bg: rgba(40, 40, 42, 0.98);
+    --input-bg: rgba(60, 60, 62, 0.9);
+    --border-color: transparent;
+    --hover-color: rgba(255, 255, 255, 0.05);
+    
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.4);
+    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+/* Base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Icons', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+html, body {
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    background: linear-gradient(135deg, rgba(var(--primary-color-rgb), 0.03) 0%, rgba(var(--primary-color-rgb), 0.06) 100%);
+    backdrop-filter: blur(20px);
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+.container {
+    width: 100%;
+    max-width: none;
+    height: 100%;
+    background: var(--container-bg);
+    border-radius: 0;
+    box-shadow: none;
+    border: none;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    animation: floatIn 0.6s var(--transition-timing);
+    padding-bottom: var(--spacing-sm);
+}
+
+/* Tighten up converter padding */
+.converter {
+    padding-bottom: 0;
+}
+
+/* Header styles */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--spacing-md) var(--spacing-xl);
+    padding-left: 60px;  /* Make space for the close button */
+    padding-right: 60px; /* Make space for the theme toggle */
+    background: var(--container-bg);
+    border-bottom: none;
+    flex-shrink: 0;
+    position: relative;
+    -webkit-app-region: drag;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    overflow: visible;
+}
+
+.title-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+.header h1 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--text-color);
+    letter-spacing: -0.02em;
+    background: linear-gradient(135deg, var(--primary-color), #4d9fff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    margin-bottom: var(--spacing-xs);
+}
+
+.header h1::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(var(--primary-color-rgb), 0.3), transparent);
+}
+
+/* Category selector */
+.category-selector {
+    padding: var(--spacing-sm);
+    padding-top: 0;
+    background: var(--container-bg);
+    border-bottom: none;
+    flex-shrink: 0;
+    margin-top: 0;
+    overflow: hidden;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.category-group {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 8px;
+    overflow: visible;
+    padding: var(--spacing-sm);
+}
+
+.category-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-xs) 0;
+    background: #f5f5f5;
+    border: none;
+    outline: none;
+    border-radius: var(--radius-md);
+    color: var(--text-color);
+    font-size: 0.75rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--transition-duration) var(--transition-timing);
+    min-height: 38px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.category-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08);
+    background: #e6e6e6;
+    border-color: transparent;
+}
+
+.category-btn.active {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Input and select styling */
+.input-row {
+    display: flex;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-lg);
+}
+
+.input-row input {
+    flex: 3;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    height: 48px;
+    padding: var(--spacing-md) var(--spacing-lg);
+    font-size: 1rem;
+    border-radius: 10px;
+}
+
+.select-wrapper {
+    position: relative;
+    flex: 2;
+}
+
+.select-wrapper select {
+    width: 100%;
+    height: 48px;
+    padding: var(--spacing-md) var(--spacing-lg);
+    padding-right: 30px;
+    background: #f0f0f0;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-color);
+    appearance: none;
+    cursor: pointer;
+    transition: all var(--transition-duration) var(--transition-timing);
+}
+
+.select-wrapper::after {
+    content: '▼';
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.select-wrapper select:focus {
+    outline: none;
+    border: 1px solid var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(var(--primary-color-rgb), 0.2);
+    background: #f8f8f8;
+}
+
+/* Adjust input group margins */
+.input-group {
+    position: relative;
+    margin-bottom: var(--spacing-xs);
+    padding: 0 var(--spacing-md);
+}
+
+.input-group input,
+.input-group textarea {
+    width: 100%;
+    padding: var(--spacing-md) var(--spacing-lg);
+    background: #f0f0f0;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    font-size: 1rem;
+    color: var(--text-color);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+    transition: all var(--transition-duration) var(--transition-timing);
+    height: 48px;
+}
+
+/* Remove number input spinners */
+.input-group input[type="number"]::-webkit-inner-spin-button,
+.input-group input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.input-group input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+.input-group input:focus,
+.input-group textarea:focus {
+    outline: none;
+    border: 1px solid var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(var(--primary-color-rgb), 0.2), 0 2px 8px rgba(0, 0, 0, 0.05);
+    background: #f8f8f8;
+}
+
+/* Dynamic input styling based on active category */
+[data-active-category="length"] .input-group input:focus,
+[data-active-category="length"] .select-wrapper select:focus {
+    box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.2), 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+[data-active-category="temperature"] .input-group input:focus,
+[data-active-category="temperature"] .select-wrapper select:focus {
+    box-shadow: 0 0 0 2px rgba(255, 59, 48, 0.2), 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+[data-active-category="weight"] .input-group input:focus,
+[data-active-category="weight"] .select-wrapper select:focus {
+    box-shadow: 0 0 0 2px rgba(88, 86, 214, 0.2), 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Add similar styles for other categories */
+
+/* Conversion info */
+.conversion-info {
+    margin: var(--spacing-xs);
+    padding: var(--spacing-xs);
+    background: var(--input-bg);
+    border-radius: var(--radius-md);
+    border: none;
+    flex: 1;
+    overflow-y: auto;
+}
+
+.conversion-info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--radius-sm);
+    background: rgba(var(--primary-color-rgb), 0.03);
+    margin-bottom: var(--spacing-xs);
+    box-shadow: var(--shadow-sm);
+    transition: all 0.2s var(--transition-timing);
+}
+
+.conversion-info-row:hover {
+    background: rgba(var(--primary-color-rgb), 0.06);
+    transform: translateX(2px);
+}
+
+.conversion-label {
+    color: var(--text-secondary);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+}
+
+.conversion-value {
+    color: var(--text-color);
+    font-weight: 600;
+    font-family: 'SF Mono', 'Menlo', monospace;
+    font-size: 0.75rem;
+    letter-spacing: -0.02em;
+    background: linear-gradient(135deg, var(--primary-color), #4d9fff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    opacity: 0.85;
+}
+
+/* Animations */
+@keyframes floatIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .category-selector {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .container {
+        margin: var(--spacing-xs);
+        border-radius: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .category-selector {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .header {
+        padding: var(--spacing-xs);
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+    
+    .input-group {
+        padding: 0 var(--spacing-xs);
+    }
+}
+
+/* Header actions positioning */
+.header-actions {
+    position: absolute;
+    right: var(--spacing-lg);
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    z-index: 10;
+}
+
+/* Left side actions (close button) */
+.header-actions-left {
+    position: absolute;
+    left: var(--spacing-lg);
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    z-index: 10;
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(var(--primary-color-rgb), 0.1);
+    color: var(--text-color);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: var(--shadow-sm);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s var(--transition-timing);
+    z-index: 10;
+    overflow: visible;
+    padding: 0;
+}
+
+.theme-toggle:hover {
+    background: rgba(var(--primary-color-rgb), 0.15);
+    transform: scale(1.05);
+}
+
+.theme-toggle:active {
+    transform: scale(0.95);
+}
+
+.theme-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.theme-icon svg {
+    width: 22px;
+    height: 22px;
+    color: var(--text-color);
+    transition: transform 0.3s ease;
+}
+
+.theme-toggle:hover svg {
+    transform: rotate(90deg);
+}
+
+[data-theme="dark"] .theme-toggle {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .theme-toggle:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: scale(1.05);
+}
+
+[data-theme="dark"] .theme-toggle:active {
+    transform: scale(0.95);
+}
+
+/* Add button styles */
+.button {
+    padding: var(--spacing-xs) var(--spacing-lg);
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s var(--transition-timing);
+    box-shadow: var(--shadow-sm);
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 36px;
+}
+
+.button:hover {
+    background: var(--primary-hover);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+
+.button:active {
+    transform: translateY(0);
+    box-shadow: var(--shadow-sm);
+}
+
+.button.secondary {
+    background: rgba(var(--primary-color-rgb), 0.1);
+    color: var(--primary-color);
+}
+
+.button.secondary:hover {
+    background: rgba(var(--primary-color-rgb), 0.15);
+}
+
+[data-theme="dark"] .category-btn {
+    background: rgba(255, 255, 255, 0.08);
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+[data-theme="dark"] .button.secondary {
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, a0.9);
+}
+
+[data-theme="dark"] .button.secondary:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* Close Button Styles */
+.close-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(var(--primary-color-rgb), 0.1);
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s var(--transition-timing);
+    position: relative;
+    overflow: visible;
+    padding: 0;
+    z-index: 10;
+}
+
+.close-btn:hover {
+    background: rgba(var(--primary-color-rgb), 0.15);
+    transform: scale(1.05);
+}
+
+.close-btn:active {
+    transform: scale(0.95);
+}
+
+.close-btn svg {
+    width: 22px;
+    height: 22px;
+    transition: all 0.2s var(--transition-timing);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.close-btn:hover svg {
+    transform: translate(-50%, -50%) rotate(90deg);
+}
+
+[data-theme="dark"] .close-btn {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-color);
+}
+
+[data-theme="dark"] .close-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: scale(1.05);
+}
+
+[data-theme="dark"] .close-btn:active {
+    transform: scale(0.95);
+}
+
+/* Dark mode text adjustments */
+[data-theme="dark"] .header h1,
+[data-theme="dark"] .conversion-value {
+    background: linear-gradient(135deg, #4d9fff, #82c0ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+[data-theme="dark"] .conversion-info-row {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="dark"] .conversion-info-row:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+/* Category-specific button styles */
+.category-btn[data-category="length"] {
+    border: none;
+    box-shadow: none;
+}
+.category-btn[data-category="temperature"] {
+    border: none;
+    box-shadow: none;
+}
+.category-btn[data-category="weight"] {
+    border: none;
+    box-shadow: none;
+}
+.category-btn[data-category="volume"] {
+    border: none;
+    box-shadow: none;
+}
+.category-btn[data-category="area"] {
+    border: none;
+    box-shadow: none;
+}
+.category-btn[data-category="speed"] {
+    border: none;
+    box-shadow: none;
+}
+.category-btn[data-category="pressure"] {
+    border: none;
+    box-shadow: none;
+}
+.category-btn[data-category="energy"] {
+    border: none;
+    box-shadow: none;
+}
+.category-btn[data-category="power"] {
+    border: none;
+    box-shadow: none;
+}
+.category-btn[data-category="time"] {
+    border: none;
+    box-shadow: none;
+}
+.category-btn[data-category="data"] {
+    border: none;
+    box-shadow: none;
+}
+.category-btn[data-category="frequency"] {
+    border: none;
+    box-shadow: none;
+}
+.category-btn[data-category="angle"] {
+    border: none;
+    box-shadow: none;
+}
+.category-btn[data-category="fuel"] {
+    border: none;
+    box-shadow: none;
+}
+.category-btn[data-category="cooking"] {
+    border: none;
+    box-shadow: none;
+}
+.category-btn[data-category="currency"] {
+    border: none;
+    box-shadow: none;
+}
+
+/* Category-specific active button styles */
+.category-btn.active[data-category="length"] {
+    background: var(--category-length);
+    color: white;
+    border: none;
+    box-shadow: var(--shadow-md);
+}
+
+.category-btn.active[data-category="temperature"] {
+    background: var(--category-temperature);
+    color: white;
+    border: none;
+    box-shadow: var(--shadow-md);
+}
+
+.category-btn.active[data-category="weight"] {
+    background: var(--category-weight);
+    color: white;
+    border: none;
+    box-shadow: var(--shadow-md);
+}
+
+.category-btn.active[data-category="volume"] {
+    background: var(--category-volume);
+    color: white;
+    border: none;
+    box-shadow: var(--shadow-md);
+}
+
+.category-btn.active[data-category="area"] {
+    background: var(--category-area);
+    color: white;
+    border: none;
+    box-shadow: var(--shadow-md);
+}
+
+.category-btn.active[data-category="speed"] {
+    background: var(--category-speed);
+    color: white;
+    border: none;
+    box-shadow: var(--shadow-md);
+}
+
+.category-btn.active[data-category="pressure"] {
+    background: var(--category-pressure);
+    color: white;
+    border: none;
+    box-shadow: var(--shadow-md);
+}
+
+.category-btn.active[data-category="energy"] {
+    background: var(--category-energy);
+    color: white;
+    border: none;
+    box-shadow: var(--shadow-md);
+}
+
+.category-btn.active[data-category="power"] {
+    background: var(--category-power);
+    color: white;
+    border: none;
+    box-shadow: var(--shadow-md);
+}
+
+.category-btn.active[data-category="time"] {
+    background: var(--category-time);
+    color: white;
+    border: none;
+    box-shadow: var(--shadow-md);
+}
+
+.category-btn.active[data-category="data"] {
+    background: var(--category-data);
+    color: white;
+    border: none;
+    box-shadow: var(--shadow-md);
+}
+
+.category-btn.active[data-category="frequency"] {
+    background: var(--category-frequency);
+    color: white;
+    border: none;
+    box-shadow: var(--shadow-md);
+}
+
+.category-btn.active[data-category="angle"] {
+    background: var(--category-angle);
+    color: white;
+    border: none;
+    box-shadow: var(--shadow-md);
+}
+
+.category-btn.active[data-category="fuel"] {
+    background: var(--category-fuel);
+    color: white;
+    border: none;
+    box-shadow: var(--shadow-md);
+}
+
+.category-btn.active[data-category="cooking"] {
+    background: var(--category-cooking);
+    color: white;
+    border: none;
+    box-shadow: var(--shadow-md);
+}
+
+.category-btn.active[data-category="currency"] {
+    background: var(--category-currency);
+    color: white;
+    border: none;
+    box-shadow: var(--shadow-md);
+}
+
+/* Dynamic header text color based on active category */
+[data-active-category="length"] .header h1 {
+    background: linear-gradient(135deg, var(--category-length), #4d9fff);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+[data-active-category="temperature"] .header h1 {
+    background: linear-gradient(135deg, var(--category-temperature), #ff7b75);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+[data-active-category="weight"] .header h1 {
+    background: linear-gradient(135deg, var(--category-weight), #8e8eff);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+[data-active-category="volume"] .header h1 {
+    background: linear-gradient(135deg, var(--category-volume), #70ff8e);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+[data-active-category="area"] .header h1 {
+    background: linear-gradient(135deg, var(--category-area), #ffba66);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+[data-active-category="speed"] .header h1 {
+    background: linear-gradient(135deg, var(--category-speed), #d194ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+[data-active-category="pressure"] .header h1 {
+    background: linear-gradient(135deg, var(--category-pressure), #ff7a92);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+[data-active-category="energy"] .header h1 {
+    background: linear-gradient(135deg, var(--category-energy), #8edfff);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+[data-active-category="power"] .header h1 {
+    background: linear-gradient(135deg, var(--category-power), #ffe066);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+[data-active-category="time"] .header h1 {
+    background: linear-gradient(135deg, var(--category-time), #6fcdff);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+[data-active-category="data"] .header h1 {
+    background: linear-gradient(135deg, var(--category-data), #cbb18e);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+[data-active-category="frequency"] .header h1 {
+    background: linear-gradient(135deg, var(--category-frequency), #4dfffb);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+[data-active-category="angle"] .header h1 {
+    background: linear-gradient(135deg, var(--category-angle), #6dd7eb);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+[data-active-category="fuel"] .header h1 {
+    background: linear-gradient(135deg, var(--category-fuel), #ffc84d);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+[data-active-category="cooking"] .header h1 {
+    background: linear-gradient(135deg, var(--category-cooking), #a2ff8a);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+[data-active-category="currency"] .header h1 {
+    background: linear-gradient(135deg, var(--category-currency), #7aff96);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+/* Apply the same color changes to the conversion values */
+[data-active-category="length"] .conversion-value {
+    background: linear-gradient(135deg, var(--category-length), #4d9fff);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+[data-active-category="temperature"] .conversion-value {
+    background: linear-gradient(135deg, var(--category-temperature), #ff7b75);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+[data-active-category="weight"] .conversion-value {
+    background: linear-gradient(135deg, var(--category-weight), #8e8eff);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+[data-active-category="volume"] .conversion-value {
+    background: linear-gradient(135deg, var(--category-volume), #70ff8e);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+[data-active-category="area"] .conversion-value {
+    background: linear-gradient(135deg, var(--category-area), #ffba66);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+[data-active-category="speed"] .conversion-value {
+    background: linear-gradient(135deg, var(--category-speed), #d194ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+[data-active-category="pressure"] .conversion-value {
+    background: linear-gradient(135deg, var(--category-pressure), #ff7a92);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+[data-active-category="energy"] .conversion-value {
+    background: linear-gradient(135deg, var(--category-energy), #8edfff);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+[data-active-category="power"] .conversion-value {
+    background: linear-gradient(135deg, var(--category-power), #ffe066);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+[data-active-category="time"] .conversion-value {
+    background: linear-gradient(135deg, var(--category-time), #6fcdff);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+[data-active-category="data"] .conversion-value {
+    background: linear-gradient(135deg, var(--category-data), #cbb18e);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+[data-active-category="frequency"] .conversion-value {
+    background: linear-gradient(135deg, var(--category-frequency), #4dfffb);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+[data-active-category="angle"] .conversion-value {
+    background: linear-gradient(135deg, var(--category-angle), #6dd7eb);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+[data-active-category="fuel"] .conversion-value {
+    background: linear-gradient(135deg, var(--category-fuel), #ffc84d);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+[data-active-category="cooking"] .conversion-value {
+    background: linear-gradient(135deg, var(--category-cooking), #a2ff8a);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+[data-active-category="currency"] .conversion-value {
+    background: linear-gradient(135deg, var(--category-currency), #7aff96);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+/* Tighten accuracy controls spacing */
+.accuracy-controls {
+    margin-top: 0;
+    padding: var(--spacing-xs) var(--spacing-lg);
+    display: flex;
+    align-items: center;
+    background: var(--input-bg);
+    border-radius: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    width: 100%;
+    position: relative;
+    z-index: 5;
+}
+
+/* Add dark mode border colors */
+[data-theme="dark"] .accuracy-controls {
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.accuracy-label {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    margin-right: var(--spacing-md);
+    min-width: 65px;
+    letter-spacing: -0.01em;
+}
+
+.accuracy-slider-container {
+    flex: 1;
+    position: relative;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    margin: 0 var(--spacing-md);
+}
+
+/* Style for the slider track based on category */
+input[type="range"].accuracy-slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 4px;
+    border-radius: 2px;
+    background: rgba(var(--primary-color-rgb), 0.15); /* Default color */
+    outline: none;
+    margin: 0;
+    position: relative;
+}
+
+/* Track styling for WebKit browsers */
+input[type="range"].accuracy-slider::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 4px;
+    cursor: pointer;
+    border-radius: 2px;
+}
+
+/* Track styling for Firefox */
+input[type="range"].accuracy-slider::-moz-range-track {
+    width: 100%;
+    height: 4px;
+    cursor: pointer;
+    border-radius: 2px;
+}
+
+/* Category-specific track colors */
+[data-active-category="length"] input[type="range"].accuracy-slider {
+    background: rgba(0, 122, 255, 0.25);
+}
+[data-active-category="temperature"] input[type="range"].accuracy-slider {
+    background: rgba(255, 59, 48, 0.25);
+}
+[data-active-category="weight"] input[type="range"].accuracy-slider {
+    background: rgba(88, 86, 214, 0.25);
+}
+[data-active-category="volume"] input[type="range"].accuracy-slider {
+    background: rgba(52, 199, 89, 0.25);
+}
+[data-active-category="area"] input[type="range"].accuracy-slider {
+    background: rgba(255, 149, 0, 0.25);
+}
+[data-active-category="speed"] input[type="range"].accuracy-slider {
+    background: rgba(175, 82, 222, 0.25);
+}
+[data-active-category="pressure"] input[type="range"].accuracy-slider {
+    background: rgba(255, 45, 85, 0.25);
+}
+[data-active-category="energy"] input[type="range"].accuracy-slider {
+    background: rgba(90, 200, 250, 0.25);
+}
+[data-active-category="power"] input[type="range"].accuracy-slider {
+    background: rgba(255, 204, 0, 0.25);
+}
+[data-active-category="time"] input[type="range"].accuracy-slider {
+    background: rgba(50, 173, 230, 0.25);
+}
+[data-active-category="data"] input[type="range"].accuracy-slider {
+    background: rgba(162, 132, 94, 0.25);
+}
+[data-active-category="frequency"] input[type="range"].accuracy-slider {
+    background: rgba(0, 199, 190, 0.25);
+}
+[data-active-category="angle"] input[type="range"].accuracy-slider {
+    background: rgba(48, 176, 199, 0.25);
+}
+[data-active-category="fuel"] input[type="range"].accuracy-slider {
+    background: rgba(230, 170, 0, 0.25);
+}
+[data-active-category="cooking"] input[type="range"].accuracy-slider {
+    background: rgba(102, 225, 61, 0.25);
+}
+[data-active-category="currency"] input[type="range"].accuracy-slider {
+    background: rgba(48, 209, 88, 0.25);
+}
+
+/* Thumb styles */
+input[type="range"].accuracy-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: white;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    border: none;
+    margin-top: -7px;
+    transition: transform 0.15s ease;
+}
+
+input[type="range"].accuracy-slider::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: white;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    border: none;
+    transition: transform 0.15s ease;
+}
+
+/* Hover state for the thumb */
+input[type="range"].accuracy-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.1);
+}
+
+input[type="range"].accuracy-slider::-moz-range-thumb:hover {
+    transform: scale(1.1);
+}
+
+/* Value display */
+.accuracy-value {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--primary-color);
+    min-width: 30px;
+    text-align: center;
+    margin: 0 var(--spacing-md);
+}
+
+/* Category-specific value colors */
+[data-active-category="length"] .accuracy-value {
+    color: var(--category-length);
+}
+
+[data-active-category="temperature"] .accuracy-value {
+    color: var(--category-temperature);
+}
+
+[data-active-category="weight"] .accuracy-value {
+    color: var(--category-weight);
+}
+
+[data-active-category="volume"] .accuracy-value {
+    color: var(--category-volume);
+}
+
+[data-active-category="area"] .accuracy-value {
+    color: var(--category-area);
+}
+
+[data-active-category="speed"] .accuracy-value {
+    color: var(--category-speed);
+}
+
+[data-active-category="pressure"] .accuracy-value {
+    color: var(--category-pressure);
+}
+
+[data-active-category="energy"] .accuracy-value {
+    color: var(--category-energy);
+}
+
+[data-active-category="power"] .accuracy-value {
+    color: var(--category-power);
+}
+
+[data-active-category="time"] .accuracy-value {
+    color: var(--category-time);
+}
+
+[data-active-category="data"] .accuracy-value {
+    color: var(--category-data);
+}
+
+[data-active-category="frequency"] .accuracy-value {
+    color: var(--category-frequency);
+}
+
+[data-active-category="angle"] .accuracy-value {
+    color: var(--category-angle);
+}
+
+[data-active-category="fuel"] .accuracy-value {
+    color: var(--category-fuel);
+}
+
+[data-active-category="cooking"] .accuracy-value {
+    color: var(--category-cooking);
+}
+
+[data-active-category="currency"] .accuracy-value {
+    color: var(--category-currency);
+}
+
+/* Precision control buttons */
+.accuracy-btn-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.accuracy-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(var(--primary-color-rgb), 0.1);
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s var(--transition-timing);
+    position: relative;
+    overflow: hidden;
+}
+
+.accuracy-btn:hover {
+    background: rgba(var(--primary-color-rgb), 0.15);
+    transform: scale(1.05);
+}
+
+.accuracy-btn:active {
+    transform: scale(0.95);
+}
+
+/* Button icons */
+.accuracy-btn.increase::before {
+    content: "";
+    display: block;
+    width: 10px;
+    height: 2px;
+    background: var(--text-color);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.accuracy-btn.increase::after {
+    content: "";
+    display: block;
+    width: 2px;
+    height: 10px;
+    background: var(--text-color);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.accuracy-btn.decrease::before {
+    content: "";
+    display: block;
+    width: 10px;
+    height: 2px;
+    background: var(--text-color);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Dynamic coloring based on active category */
+[data-active-category="length"] input[type="range"].accuracy-slider::-webkit-slider-thumb {
+    background: var(--category-length);
+}
+[data-active-category="temperature"] input[type="range"].accuracy-slider::-webkit-slider-thumb {
+    background: var(--category-temperature);
+}
+[data-active-category="weight"] input[type="range"].accuracy-slider::-webkit-slider-thumb {
+    background: var(--category-weight);
+}
+[data-active-category="volume"] input[type="range"].accuracy-slider::-webkit-slider-thumb {
+    background: var(--category-volume);
+}
+[data-active-category="area"] input[type="range"].accuracy-slider::-webkit-slider-thumb {
+    background: var(--category-area);
+}
+[data-active-category="speed"] input[type="range"].accuracy-slider::-webkit-slider-thumb {
+    background: var(--category-speed);
+}
+[data-active-category="pressure"] input[type="range"].accuracy-slider::-webkit-slider-thumb {
+    background: var(--category-pressure);
+}
+[data-active-category="energy"] input[type="range"].accuracy-slider::-webkit-slider-thumb {
+    background: var(--category-energy);
+}
+[data-active-category="power"] input[type="range"].accuracy-slider::-webkit-slider-thumb {
+    background: var(--category-power);
+}
+[data-active-category="time"] input[type="range"].accuracy-slider::-webkit-slider-thumb {
+    background: var(--category-time);
+}
+[data-active-category="data"] input[type="range"].accuracy-slider::-webkit-slider-thumb {
+    background: var(--category-data);
+}
+[data-active-category="frequency"] input[type="range"].accuracy-slider::-webkit-slider-thumb {
+    background: var(--category-frequency);
+}
+[data-active-category="angle"] input[type="range"].accuracy-slider::-webkit-slider-thumb {
+    background: var(--category-angle);
+}
+[data-active-category="fuel"] input[type="range"].accuracy-slider::-webkit-slider-thumb {
+    background: var(--category-fuel);
+}
+[data-active-category="cooking"] input[type="range"].accuracy-slider::-webkit-slider-thumb {
+    background: var(--category-cooking);
+}
+[data-active-category="currency"] input[type="range"].accuracy-slider::-webkit-slider-thumb {
+    background: var(--category-currency);
+}
+
+/* Firefox specific thumb styles */
+[data-active-category="length"] input[type="range"].accuracy-slider::-moz-range-thumb {
+    background: var(--category-length);
+}
+[data-active-category="temperature"] input[type="range"].accuracy-slider::-moz-range-thumb {
+    background: var(--category-temperature);
+}
+[data-active-category="weight"] input[type="range"].accuracy-slider::-moz-range-thumb {
+    background: var(--category-weight);
+}
+[data-active-category="volume"] input[type="range"].accuracy-slider::-moz-range-thumb {
+    background: var(--category-volume);
+}
+[data-active-category="area"] input[type="range"].accuracy-slider::-moz-range-thumb {
+    background: var(--category-area);
+}
+[data-active-category="speed"] input[type="range"].accuracy-slider::-moz-range-thumb {
+    background: var(--category-speed);
+}
+[data-active-category="pressure"] input[type="range"].accuracy-slider::-moz-range-thumb {
+    background: var(--category-pressure);
+}
+[data-active-category="energy"] input[type="range"].accuracy-slider::-moz-range-thumb {
+    background: var(--category-energy);
+}
+[data-active-category="power"] input[type="range"].accuracy-slider::-moz-range-thumb {
+    background: var(--category-power);
+}
+[data-active-category="time"] input[type="range"].accuracy-slider::-moz-range-thumb {
+    background: var(--category-time);
+}
+[data-active-category="data"] input[type="range"].accuracy-slider::-moz-range-thumb {
+    background: var(--category-data);
+}
+[data-active-category="frequency"] input[type="range"].accuracy-slider::-moz-range-thumb {
+    background: var(--category-frequency);
+}
+[data-active-category="angle"] input[type="range"].accuracy-slider::-moz-range-thumb {
+    background: var(--category-angle);
+}
+[data-active-category="fuel"] input[type="range"].accuracy-slider::-moz-range-thumb {
+    background: var(--category-fuel);
+}
+[data-active-category="cooking"] input[type="range"].accuracy-slider::-moz-range-thumb {
+    background: var(--category-cooking);
+}
+[data-active-category="currency"] input[type="range"].accuracy-slider::-moz-range-thumb {
+    background: var(--category-currency);
+}
+
+/* Button colors for categories */
+[data-active-category="length"] .accuracy-btn {
+    background: rgba(0, 122, 255, 0.1);
+}
+[data-active-category="length"] .accuracy-btn:hover {
+    background: rgba(0, 122, 255, 0.15);
+}
+[data-active-category="temperature"] .accuracy-btn {
+    background: rgba(255, 59, 48, 0.1);
+}
+[data-active-category="temperature"] .accuracy-btn:hover {
+    background: rgba(255, 59, 48, 0.15);
+}
+
+[data-theme="dark"] .category-btn:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: transparent;
+    transform: translateY(-1px);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
+}
+
+[data-theme="dark"] .category-btn.active {
+    border: none;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Dark mode adjustments for top boxes */
+[data-theme="dark"] .container {
+    background: var(--container-bg);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: var(--shadow-lg), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="dark"] .header {
+    background: var(--container-bg);
+}
+
+[data-theme="dark"] .converter {
+    background: var(--container-bg);
+}
+
+[data-theme="dark"] .accuracy-controls {
+    background: rgba(50, 50, 52, 0.9);
+}
+
+/* Dark mode input styling to match category boxes */
+[data-theme="dark"] .input-group input,
+[data-theme="dark"] .input-group textarea,
+[data-theme="dark"] .select-wrapper select {
+    background: rgba(60, 60, 62, 0.9);
+    border: none;
+    color: var(--text-color);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+[data-theme="dark"] .input-group input:focus,
+[data-theme="dark"] .input-group textarea:focus,
+[data-theme="dark"] .select-wrapper select:focus {
+    background: rgba(70, 70, 72, 0.9);
+    border: none;
+    box-shadow: 0 0 0 2px rgba(var(--primary-color-rgb), 0.2), 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Remove all category-specific input styling in dark mode */
+[data-theme="dark"][data-active-category="length"] .input-group input,
+[data-theme="dark"][data-active-category="length"] .select-wrapper select,
+[data-theme="dark"][data-active-category="temperature"] .input-group input,
+[data-theme="dark"][data-active-category="temperature"] .select-wrapper select,
+[data-theme="dark"][data-active-category="weight"] .input-group input,
+[data-theme="dark"][data-active-category="weight"] .select-wrapper select,
+[data-theme="dark"][data-active-category="volume"] .input-group input,
+[data-theme="dark"][data-active-category="volume"] .select-wrapper select,
+[data-theme="dark"][data-active-category="area"] .input-group input,
+[data-theme="dark"][data-active-category="area"] .select-wrapper select,
+[data-theme="dark"][data-active-category="speed"] .input-group input,
+[data-theme="dark"][data-active-category="speed"] .select-wrapper select,
+[data-theme="dark"][data-active-category="pressure"] .input-group input,
+[data-theme="dark"][data-active-category="pressure"] .select-wrapper select,
+[data-theme="dark"][data-active-category="energy"] .input-group input,
+[data-theme="dark"][data-active-category="energy"] .select-wrapper select,
+[data-theme="dark"][data-active-category="power"] .input-group input,
+[data-theme="dark"][data-active-category="power"] .select-wrapper select,
+[data-theme="dark"][data-active-category="time"] .input-group input,
+[data-theme="dark"][data-active-category="time"] .select-wrapper select,
+[data-theme="dark"][data-active-category="data"] .input-group input,
+[data-theme="dark"][data-active-category="data"] .select-wrapper select,
+[data-theme="dark"][data-active-category="frequency"] .input-group input,
+[data-theme="dark"][data-active-category="frequency"] .select-wrapper select,
+[data-theme="dark"][data-active-category="angle"] .input-group input,
+[data-theme="dark"][data-active-category="angle"] .select-wrapper select,
+[data-theme="dark"][data-active-category="fuel"] .input-group input,
+[data-theme="dark"][data-active-category="fuel"] .select-wrapper select,
+[data-theme="dark"][data-active-category="cooking"] .input-group input,
+[data-theme="dark"][data-active-category="cooking"] .select-wrapper select,
+[data-theme="dark"][data-active-category="currency"] .input-group input,
+[data-theme="dark"][data-active-category="currency"] .select-wrapper select {
+    background: rgba(60, 60, 62, 0.9);
+}
+
+/* Hide background blobs */ .background-blob { display: none; }
