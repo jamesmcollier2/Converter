@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit Converter</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Add background blobs -->
+    <div class="background-blob blob-1"></div>
+    <div class="background-blob blob-2"></div>
+    <div class="background-blob blob-3"></div>
+    
+    <div class="container">
+        <div class="header">
+            <h1>Unit Converter</h1>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                <div class="theme-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 18a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM11 1h2v3h-2V1zm0 19h2v3h-2v-3zM3.515 4.929l1.414-1.414L7.05 5.636 5.636 7.05 3.515 4.93zM16.95 18.364l1.414-1.414 2.121 2.121-1.414 1.414-2.121-2.121zm2.121-14.85l1.414 1.415-2.121 2.121-1.414-1.414 2.121-2.121zM5.636 16.95l1.414 1.414-2.121 2.121-1.414-1.414 2.121-2.121zM23 11v2h-3v-2h3zM4 11v2H1v-2h3z"/></svg>
+                </div>
+            </button>
+        </div>
+
+        <div class="category-selector">
+            <div class="category-group">
+                <button class="category-btn active" data-category="length">Length</button>
+                <button class="category-btn" data-category="temperature">Temp</button>
+                <button class="category-btn" data-category="weight">Weight</button>
+                <button class="category-btn" data-category="volume">Volume</button>
+                <button class="category-btn" data-category="area">Area</button>
+                <button class="category-btn" data-category="speed">Speed</button>
+                <button class="category-btn" data-category="pressure">Pressure</button>
+                <button class="category-btn" data-category="energy">Energy</button>
+                <button class="category-btn" data-category="power">Power</button>
+                <button class="category-btn" data-category="time">Time</button>
+                <button class="category-btn" data-category="data">Data</button>
+                <button class="category-btn" data-category="frequency">Frequency</button>
+                <button class="category-btn" data-category="angle">Angle</button>
+                <button class="category-btn" data-category="fuel">Fuel</button>
+                <button class="category-btn" data-category="cooking">Cooking</button>
+                <button class="category-btn" data-category="currency">Currency</button>
+            </div>
+        </div>
+
+        <div class="converter">
+            <div class="input-group">
+                <input type="number" id="inputValue" placeholder="Enter value">
+                <select id="inputUnit"></select>
+            </div>
+            
+            <button id="swapUnits" class="swap-btn" aria-label="Swap units">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                    <path fill="none" d="M0 0h24v24H0z"/>
+                    <path d="M16.05 12.05L21 17l-4.95 4.95-1.414-1.414 2.536-2.537L4 18v-2h13.172l-2.536-2.536 1.414-1.414zm-8.1-10l1.414 1.414L6.828 6H20v2H6.828l2.536 2.536L7.95 11.95 3 7l4.95-4.95z"/>
+                </svg>
+            </button>
+            
+            <div class="input-group">
+                <input type="number" id="outputValue" readonly>
+                <select id="outputUnit"></select>
+            </div>
+        </div>
+
+        <div class="accuracy-control">
+            <div class="accuracy-label">
+                <span>Precision:</span>
+                <span id="accuracyValue">4</span>
+            </div>
+            <div class="accuracy-slider-container">
+                <button class="accuracy-btn" id="decreaseAccuracy" aria-label="Decrease precision">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                        <path fill="none" d="M0 0h24v24H0z"/>
+                        <path d="M5 11h14v2H5z"/>
+                    </svg>
+                </button>
+                <div class="accuracy-track">
+                    <div class="accuracy-fill"></div>
+                </div>
+                <input type="range" min="0" max="10" value="4" class="accuracy-slider" id="accuracySlider">
+                <button class="accuracy-btn" id="increaseAccuracy" aria-label="Increase precision">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                        <path fill="none" d="M0 0h24v24H0z"/>
+                        <path d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
+
